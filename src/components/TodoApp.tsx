@@ -1,5 +1,9 @@
 import { useState } from "react"
 import { TaskList } from "./TaskList"
+import '../styles/TodoApp.css'
+
+import addIcon from '/icons/add-icon.svg'
+import titleIcon from '/icons/task-icon.svg'
 
 export const TodoApp = () => {
 
@@ -17,8 +21,8 @@ export const TodoApp = () => {
   }
 
   return (
-    <div>
-        <h1>Lista de tareas</h1>
+    <div className="container-app">
+      <h1 className="title"><img className="title-icon" src={titleIcon} alt="icon" />TO<span>DO</span></h1>
         <div className="flex">
             <input 
                 type="text" 
@@ -26,7 +30,7 @@ export const TodoApp = () => {
                 onChange={(e)=> setNewTask(e.target.value)} 
                 placeholder="nueva tarea"
             />
-            <button onClick={handleAddTask} className="buttonAdd">Agregar Tarea</button>
+            <button onClick={handleAddTask} className="button-add"><img className="add-icon" src={addIcon} alt="icon" /></button>
         </div>
         <TaskList taskList={taskList} deleteTask={handleBorrarTarea}></TaskList>
     </div>

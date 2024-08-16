@@ -1,0 +1,97 @@
+.task {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  padding-left: 10px;
+  border: 1px solid var(--main-focus);
+  margin-bottom: 10px;
+  color: rgb(232, 232, 232);
+  min-width: 100%;
+  font-size: 1.3em;
+  width: 700px;
+}
+
+.cont-text{
+  align-content: center;
+  min-width: 0px;
+}
+
+.text-task {
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.text-task-check{
+  text-decoration: line-through;
+  text-decoration-color: white;
+}
+
+.task-options{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.check-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  transition: background .1s ease-in;
+  margin: 0px 10px;
+  padding: .2em .4em;
+  user-select: none;
+  cursor: pointer;
+  border-radius: 8px;
+  filter: brightness(.4);
+}
+
+.check-button-active{
+  filter: brightness(1.2);
+  animation: check-animation .2s ease forwards;
+}
+
+@keyframes check-animation {
+  0%{
+    scale: .1;
+  }
+
+  50%{
+    scale: 1.3;
+  }
+
+  70%{
+    scale: .9;
+  }
+
+  90%{
+    scale: 1.1;
+  }
+
+  100%{
+    scale: 1;
+  }
+}
+
+.option-button {
+  background: none;
+  transition: background .1s ease-in;
+  margin: 0px 5px;
+  padding: .2em .4em;
+  user-select: none;
+}
+
+.option-button:hover {
+  background-color: rgba(80, 195, 65, .1);
+}
+
+.option-icon{
+  width: 32px;
+  height: 32px;
+}
+
+/* .a{
+  
+  border-radius: 50%;
+  border: 2px solid rgb(196, 209, 169);
+} */
