@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { TaskList } from "./TaskList"
 import '../styles/TodoApp.css'
 
@@ -16,9 +16,18 @@ export const TodoApp = () => {
     setNewTask('')
   }
 
-  const handleBorrarTarea =(index: number)=>{
+  const handleDeleteTask =(index: number)=>{
     setTaskList(task => task.filter((_,i)=> i !== index))
+    console.log(index);
+    
   }
+
+  const editTask = (index: number, text: string) => {
+  
+    setTaskList((prevTasks) =>
+      prevTasks.map((task, i) => (i === index ? text : task))
+    );
+  };
 
   return (
     <div className="container-app">
@@ -32,7 +41,7 @@ export const TodoApp = () => {
             />
             <button onClick={handleAddTask} className="button-add"><img className="add-icon" src={addIcon} alt="icon" /></button>
         </div>
-        <TaskList taskList={taskList} deleteTask={handleBorrarTarea}></TaskList>
+        <TaskList taskList={taskList} deleteTask={handleDeleteTask} sendTask={editTask}></TaskList>
     </div>
   )
 }

@@ -9,11 +9,19 @@
   min-width: 100%;
   font-size: 1.3em;
   width: 700px;
+
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .cont-text{
   align-content: center;
   min-width: 0px;
+}
+
+.editing{
+  width: 100%;
 }
 
 .text-task {
@@ -51,6 +59,10 @@
   animation: check-animation .2s ease forwards;
 }
 
+.no-event{
+  pointer-events: none;
+}
+
 @keyframes check-animation {
   0%{
     scale: .1;
@@ -74,6 +86,9 @@
 }
 
 .option-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: none;
   transition: background .1s ease-in;
   margin: 0px 5px;
@@ -90,8 +105,26 @@
   height: 32px;
 }
 
-/* .a{
-  
-  border-radius: 50%;
-  border: 2px solid rgb(196, 209, 169);
-} */
+.cont-edit-input{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+input.edit-input[type="text"]{
+  background: none;
+  border: none;
+  border-bottom: 2px solid rgb(111, 130, 68);
+  border-radius: 0px;
+  padding: 3px 12px;
+  font-size: 21px;
+  text-align: center;
+  position: relative;
+  top: 1px;
+}
+
+input.edit-input[type="text"]:focus{
+  border-color: rgba(255, 255, 255, .6);
+}
+
