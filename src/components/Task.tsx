@@ -11,8 +11,8 @@ import editButton from '/icons/edit-button.svg'
 type Task = {
   task: string
   deleteTask: () => void
-  editTask: (index: number, text: string) => void
-  index: number
+  editTask: (index: string, text: string) => void
+  id: string
 }
 
 interface Dates {
@@ -23,7 +23,7 @@ interface Dates {
   year: number
 }
 
-export const Task = ({ task, deleteTask, editTask, index }: Task) => {
+export const Task = ({ task, deleteTask, editTask, id }: Task) => {
 
   const [confirmCheck, setConfirmCheck] = useState<boolean>(false);
   const [isEditing, setIsEditing] = useState<boolean>(false);
@@ -65,12 +65,12 @@ export const Task = ({ task, deleteTask, editTask, index }: Task) => {
   const handleSaveTask = (event: React.FormEvent) => {
     event.preventDefault();
     if(newTask.trim() === '') return
-    editTask(index, newTask)
+    editTask(id, newTask)
     setIsEditing(false)
   }
 
   return (
-    <div className='cont-1'>
+    <div className={`container-task ${confirmCheck ? 'siii' : ''}`}>
       <div className="task">
         
         <div className={`check-button ${confirmCheck ? 'check-button-active' : ''} ${isEditing ? 'no-event' : ''}`} onClick={checkActive}>
@@ -96,12 +96,12 @@ export const Task = ({ task, deleteTask, editTask, index }: Task) => {
           {isEditing
 
             ? (<button className='option-button' onClick={handleSaveTask} form='form'>
-              <img className="option-icon" src={editButton} alt="icon" />
-            </button>)
+                <img className="option-icon" src={editButton} alt="icon" />
+              </button>)
 
             : (<button className="option-button" onClick={deleteTask}>
-              <img className="option-icon" src={deleteIcon} alt="icon" />
-            </button>)
+                <img className="option-icon" src={deleteIcon} alt="icon" />
+              </button>)
           }
 
 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { TaskList } from "./TaskList"
 import '../styles/TodoApp.css'
+import { v4 as uuidv4 } from 'uuid';
 
 import addIcon from '/icons/add-icon.svg'
 import titleIcon from '/icons/task-icon.svg'
@@ -8,24 +9,23 @@ import titleIcon from '/icons/task-icon.svg'
 export const TodoApp = () => {
 
   const [newTask, setNewTask] = useState<string> ('')
-  const [taskList, setTaskList] = useState<string[]>([])
+  const [taskList, setTaskList] = useState([
+    { id: uuidv4(), task: '- Agrega mas tareas 📋', completed: false },
+  ]);
 
-  const handleAddTask = () =>{
-    if(newTask.trim() === '') return
-    setTaskList(prevTask => [...prevTask, newTask]);
-    setNewTask('')
-  }
+  const handleAddTask = () => {
+    if (newTask.trim() === '') return;
+    setTaskList((prevTasks) => [...prevTasks, { id: uuidv4(), task: newTask, completed: false }]);
+    setNewTask('');
+  };
 
-  const handleDeleteTask =(index: number)=>{
-    setTaskList(task => task.filter((_,i)=> i !== index))
-    console.log(index);
-    
-  }
+  const handleDeleteTask = (id: string) => {
+    setTaskList((prevTasks) => prevTasks.filter((task) => task.id !== id));
+  };
 
-  const editTask = (index: number, text: string) => {
-  
+  const editTask = (id: string, text: string) => {
     setTaskList((prevTasks) =>
-      prevTasks.map((task, i) => (i === index ? text : task))
+      prevTasks.map((task) => (task.id === id ? { ...task, task: text } : task))
     );
   };
 
