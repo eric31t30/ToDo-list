@@ -7,7 +7,7 @@
 }
 
 .container-app{
-    margin-top: 50px;
+    margin-top: 150px;
 }
 
 .flex {
@@ -20,12 +20,12 @@
 }
   
 .title {
-    position: relative;
-    right: 90%;
+    position: absolute;
+    left: 10%;
+    top: 40px;
     font-size: 3.7em;
     line-height: 1.1;
     text-align: center;
-    margin-bottom: 20px;
     font-family: "Exo 2", sans-serif;
     display: flex;
     justify-content: center;
