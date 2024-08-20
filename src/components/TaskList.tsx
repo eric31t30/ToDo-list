@@ -3,17 +3,25 @@ import '../styles/TaskList.css'
 
 
 type taskList = {
-  taskList: { id: string; task: string; completed: boolean; }[];
+  taskList: { id: string; task: string;}[];
   deleteTask: (index: string) => void
   sendTask: (index: string, text: string) => void
+  toggleTaskCompletion: (id: string, validate: boolean)=> void
 }
 
-export const TaskList = ({taskList, deleteTask, sendTask}: taskList) => {
+export const TaskList = ({taskList, deleteTask, sendTask, toggleTaskCompletion}: taskList) => {
 
-   return (
+  return (
     <div className="task-list">
       {taskList.map((task)=>(
-        <Task key={task.id} task={task.task} id={task.id} deleteTask={()=> deleteTask(task.id)}  editTask={(text)=> sendTask(task.id, text)}></Task>
+        <Task 
+          key={task.id} 
+          task={task.task} 
+          id={task.id} 
+          deleteTask={()=> deleteTask(task.id)}  
+          editTask={(_, text)=> {sendTask(task.id, text)}}
+          toggleTaskCompletion={(_, validate)=> toggleTaskCompletion(task.id, validate)}
+          ></Task>
       ))}
     </div>
   )

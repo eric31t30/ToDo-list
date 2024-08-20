@@ -13,6 +13,7 @@ type Task = {
   deleteTask: () => void
   editTask: (index: string, text: string) => void
   id: string
+  toggleTaskCompletion: (index: string, validate: boolean) => void;
 }
 
 interface Dates {
@@ -23,20 +24,20 @@ interface Dates {
   year: number
 }
 
-export const Task = ({ task, deleteTask, editTask, id }: Task) => {
+export const Task = ({ task, deleteTask, editTask, id, toggleTaskCompletion }: Task) => {
 
   const [confirmCheck, setConfirmCheck] = useState<boolean>(false);
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [newTask, setNewTask] = useState<string>(task);
   const [creationDate, setCreationDate] = useState<string>('');
-  
-  const [date, setDate] = useState<Dates>({
+ 
+  const date: Dates = {
     hour: String(new Date().getHours()).padStart(2, '0'),
     minute: String(new Date().getMinutes()).padStart(2, '0'),
     day: new Date().getDate(),
     month: new Date().getMonth() + 1,
     year: new Date().getFullYear()
-  });
+  };
 
   useEffect(() => {
     const hourNumber = parseInt(date.hour, 10);
@@ -55,7 +56,6 @@ export const Task = ({ task, deleteTask, editTask, id }: Task) => {
     } else {
       setIsEditing(true);
     }
-
   }
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -68,6 +68,11 @@ export const Task = ({ task, deleteTask, editTask, id }: Task) => {
     editTask(id, newTask)
     setIsEditing(false)
   }
+
+  useEffect(() => {
+    toggleTaskCompletion(id, confirmCheck)
+  }, [confirmCheck])
+  
 
   return (
     <div className={`container-task ${confirmCheck ? 'siii' : ''}`}>
