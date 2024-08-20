@@ -11,8 +11,9 @@ import editButton from '/icons/edit-button.svg'
 type Task = {
   task: string
   deleteTask: () => void
-  editTask: (index: number, text: string) => void
-  index: number
+  editTask: (index: string, text: string) => void
+  id: string
+  toggleTaskCompletion: (index: string, validate: boolean) => void;
 }
 
 interface Dates {
@@ -23,20 +24,20 @@ interface Dates {
   year: number
 }
 
-export const Task = ({ task, deleteTask, editTask, index }: Task) => {
+export const Task = ({ task, deleteTask, editTask, id, toggleTaskCompletion }: Task) => {
 
   const [confirmCheck, setConfirmCheck] = useState<boolean>(false);
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [newTask, setNewTask] = useState<string>(task);
   const [creationDate, setCreationDate] = useState<string>('');
-  
-  const [date, setDate] = useState<Dates>({
+ 
+  const date: Dates = {
     hour: String(new Date().getHours()).padStart(2, '0'),
     minute: String(new Date().getMinutes()).padStart(2, '0'),
     day: new Date().getDate(),
     month: new Date().getMonth() + 1,
     year: new Date().getFullYear()
-  });
+  };
 
   useEffect(() => {
     const hourNumber = parseInt(date.hour, 10);
@@ -55,7 +56,6 @@ export const Task = ({ task, deleteTask, editTask, index }: Task) => {
     } else {
       setIsEditing(true);
     }
-
   }
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,12 +65,17 @@ export const Task = ({ task, deleteTask, editTask, index }: Task) => {
   const handleSaveTask = (event: React.FormEvent) => {
     event.preventDefault();
     if(newTask.trim() === '') return
-    editTask(index, newTask)
+    editTask(id, newTask)
     setIsEditing(false)
   }
 
+  useEffect(() => {
+    toggleTaskCompletion(id, confirmCheck)
+  }, [confirmCheck])
+  
+
   return (
-    <div className='cont-1'>
+    <div className={`container-task ${confirmCheck ? 'siii' : ''}`}>
       <div className="task">
         
         <div className={`check-button ${confirmCheck ? 'check-button-active' : ''} ${isEditing ? 'no-event' : ''}`} onClick={checkActive}>
@@ -96,12 +101,12 @@ export const Task = ({ task, deleteTask, editTask, index }: Task) => {
           {isEditing
 
             ? (<button className='option-button' onClick={handleSaveTask} form='form'>
-              <img className="option-icon" src={editButton} alt="icon" />
-            </button>)
+                <img className="option-icon" src={editButton} alt="icon" />
+              </button>)
 
             : (<button className="option-button" onClick={deleteTask}>
-              <img className="option-icon" src={deleteIcon} alt="icon" />
-            </button>)
+                <img className="option-icon" src={deleteIcon} alt="icon" />
+              </button>)
           }
 
 

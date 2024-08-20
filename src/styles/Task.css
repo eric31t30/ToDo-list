@@ -1,4 +1,4 @@
-.cont-1{
+.container-task{
   display: flex;
   flex-direction: column;
   border: 1px solid var(--main-focus);
