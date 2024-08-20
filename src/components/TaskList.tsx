@@ -1,7 +1,6 @@
 import { Task } from "./Task"
 import '../styles/TaskList.css'
 
-
 type taskList = {
   taskList: { id: string; task: string;}[];
   deleteTask: (index: string) => void

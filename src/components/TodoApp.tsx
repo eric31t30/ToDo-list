@@ -57,22 +57,22 @@ export const TodoApp = () => {
   
   return (
     <div className="container-app">
+      <h1 className="title"><img className="title-icon" src={titleIcon} alt="icon" draggable="false"/>TO<span>DO</span></h1>
       <div className="counter">
         <span className="text-count"> TAREAS
-          <img className="text-count-icon" src={editIcon} alt="icon"/>
+          <img className="text-count-icon" src={editIcon} alt="icon" draggable="false"/>
           REALIDAS
         </span>
         <span className="task-count">{completedTasks} / {taskList.length}</span>
       </div>
-      <h1 className="title"><img className="title-icon" src={titleIcon} alt="icon" />TO<span>DO</span></h1>
-        <div className="flex">
+      <div className="flex">
             <input 
                 type="text" 
                 value={newTask}  
                 onChange={(e)=> setNewTask(e.target.value)} 
                 placeholder="nueva tarea"
             />
-            <button onClick={handleAddTask} className="button-add"><img className="add-icon" src={addIcon} alt="icon" /></button>
+            <button onClick={handleAddTask} className="button-add"><img className="add-icon" src={addIcon} alt="icon" draggable="false"/></button>
         </div>
         <TaskList 
           taskList={taskList} 

@@ -79,7 +79,7 @@ export const Task = ({ task, deleteTask, editTask, id, toggleTaskCompletion }: T
       <div className="task">
         
         <div className={`check-button ${confirmCheck ? 'check-button-active' : ''} ${isEditing ? 'no-event' : ''}`} onClick={checkActive}>
-          <img className="option-icon" src={checkIcon} alt="icon" />
+          <img className="option-icon" src={checkIcon} alt="icon" draggable="false" />
         </div>
 
         <div className={`cont-text  ${isEditing ? 'editing' : ''}`}>
@@ -101,19 +101,19 @@ export const Task = ({ task, deleteTask, editTask, id, toggleTaskCompletion }: T
           {isEditing
 
             ? (<button className='option-button' onClick={handleSaveTask} form='form'>
-                <img className="option-icon" src={editButton} alt="icon" />
+                <img className="option-icon" src={editButton} alt="icon" draggable="false"/>
               </button>)
 
             : (<button className="option-button" onClick={deleteTask}>
-                <img className="option-icon" src={deleteIcon} alt="icon" />
+                <img className="option-icon" src={deleteIcon} alt="icon" draggable="false" />
               </button>)
           }
 
 
           <button className="option-button" onClick={handleEditClick}>
             {isEditing
-              ? (<img className="option-icon" src={cancelIcon} alt="icon" />)
-              : (<img className="option-icon" src={editIcon} alt="icon" />)}
+              ? (<img className="option-icon" src={cancelIcon} alt="icon" draggable="false" />)
+              : (<img className="option-icon" src={editIcon} alt="icon" draggable="false" />)}
           </button>
         </div>
 
