@@ -109,8 +109,9 @@ export const Task = ({ task, deleteTask, editTask, id, toggleTaskCompletion, com
           </button>
         </div>
       </div>
-      <div className='cont-date'>
+      <div className='cont-date' draggable='false'>
         <span className='border-space'></span>
+        <div className='text-space'>este texto es para brindar un espacio</div>
         <div className='date'>{creationDate}</div>
       </div>
     </div>
