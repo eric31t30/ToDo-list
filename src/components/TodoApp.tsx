@@ -16,10 +16,20 @@ interface Task {
 export const TodoApp = () => {
 
   const [newTask, setNewTask] = useState<string> ('')
-  const [taskList, setTaskList] = useState<Task[]>([
-    { id: uuidv4(), task: '- Agrega mas tareas ', completed: false },
-  ]);
   const [completedTasks, setCompletedTasks] = useState<number>(0);
+  const [taskList, setTaskList] = useState<Task[]>(() => {
+    const savedTasks = localStorage.getItem("taskList");
+    return savedTasks ? JSON.parse(savedTasks) : [{ id: uuidv4(), task: '- Agrega más tareas', completed: false }];
+  });
+
+  useEffect(() => {
+    const savedTasks = localStorage.getItem("taskList");
+    if (savedTasks) {
+      console.log("Loading from localStorage:", JSON.parse(savedTasks));
+      setTaskList(JSON.parse(savedTasks));
+    }
+  }, []);
+
   const handleAddTask = () => {
     if (newTask.trim() === '') return;
     setTaskList((prevTasks) => [...prevTasks, { id: uuidv4(), task: newTask, completed: false }]);
@@ -52,9 +62,12 @@ export const TodoApp = () => {
    
     setCompletedTasks(completedCount);
   }, [taskList])
+
+  useEffect(() => {
+    localStorage.setItem("taskList", JSON.stringify(taskList));
+  }, [taskList]);
   
 
-  
   return (
     <div className="container-app">
       <h1 className="title"><img className="title-icon" src={titleIcon} alt="icon" draggable="false"/>TO<span>DO</span></h1>

@@ -2,7 +2,7 @@ import { Task } from "./Task"
 import '../styles/TaskList.css'
 
 type taskList = {
-  taskList: { id: string; task: string;}[];
+  taskList: { id: string; task: string; completed: boolean}[];
   deleteTask: (index: string) => void
   sendTask: (index: string, text: string) => void
   toggleTaskCompletion: (id: string, validate: boolean)=> void
@@ -20,6 +20,7 @@ export const TaskList = ({taskList, deleteTask, sendTask, toggleTaskCompletion}:
           deleteTask={()=> deleteTask(task.id)}  
           editTask={(_, text)=> {sendTask(task.id, text)}}
           toggleTaskCompletion={(_, validate)=> toggleTaskCompletion(task.id, validate)}
+          completed={task.completed}
           ></Task>
       ))}
     </div>
