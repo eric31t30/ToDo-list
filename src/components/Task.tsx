@@ -53,6 +53,7 @@ export const Task = ({ task, deleteTask, editTask, id, toggleTaskCompletion, com
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewTask(event.target.value);
+    
   }
 
   const handleSaveTask = (event: React.FormEvent) => {
@@ -71,7 +72,7 @@ export const Task = ({ task, deleteTask, editTask, id, toggleTaskCompletion, com
   }, [completed]);
 
   return (
-    <div className={`container-task ${confirmCheck ? 'siii' : ''}`}>
+    <div className={`container-task`}>
       <div className="task">
         <div className={`check-button ${confirmCheck ? 'check-button-active' : ''} ${isEditing ? 'no-event' : ''}`} onClick={checkActive}>
           <img className="option-icon" src={checkIcon} alt="icon" draggable="false" />
