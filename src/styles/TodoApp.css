@@ -83,12 +83,65 @@ input[type="text"] {
     font-family: "Roboto", sans-serif;
     font-weight: 400;
     font-style: normal;
+    z-index: 2;
 }
 
 input[type="text"]:focus{
     border-color: var(--main-focus);
 }
 
+.cont-text-invalid{
+    position: relative;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.cont-background{
+    position: relative;
+    top: 40px;
+    text-align: center;
+    align-content: center;
+    background-color: rgb(39, 42, 58);
+    border-radius: 5px;
+    transition: all .3s ease;
+    opacity: 0;
+    z-index: 1;
+    width: auto;
+}
+
+.cont-text-invalid:hover .active-background{
+    top: -10px;
+}
+
+.active-background{
+    top: 0px;
+    opacity: 1;
+}
+
+.text-invalid{
+    color: var(--main-focus);
+    margin: 3px 15px;
+    font-size: 18px;
+    font-family: "Exo 2", sans-serif;
+}
+
+.triangle-icon{
+    position: absolute;
+    left: 45%;
+    bottom: -0px;
+    width: 26px;
+    height: 26px;
+    transform: rotate(180deg);
+    z-index: -1;
+    transition: all .3s ease-in-out;
+}
+
+.cont-background:hover .triangle-icon{
+    bottom: -20px;
+}
 
 .counter{
     position: absolute;
@@ -102,9 +155,7 @@ input[type="text"]:focus{
     border: 2px solid var(--main-focus);
     border-radius: 20px;
     padding: 10px 20px;
-    font-family: "Roboto", sans-serif;
-    font-weight: 400;
-    font-style: normal;
+    font-family: "Exo 2", sans-serif;
 }
 
 .text-count{

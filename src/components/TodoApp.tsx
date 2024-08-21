@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import addIcon from '/icons/add-icon.svg'
 import titleIcon from '/icons/task-icon.svg'
 import editIcon from '/icons/edit-icon.svg'
+import triangleIcon from '/icons/triangle-icon.svg'
 
 interface Task {
   id: string;
@@ -16,24 +17,25 @@ interface Task {
 export const TodoApp = () => {
 
   const [newTask, setNewTask] = useState<string> ('')
+  const [validate, setValidate] = useState<boolean>()
   const [completedTasks, setCompletedTasks] = useState<number>(0);
   const [taskList, setTaskList] = useState<Task[]>(() => {
     const savedTasks = localStorage.getItem("taskList");
     return savedTasks ? JSON.parse(savedTasks) : [{ id: uuidv4(), task: '- Agrega más tareas', completed: false }];
   });
 
-  useEffect(() => {
-    const savedTasks = localStorage.getItem("taskList");
-    if (savedTasks) {
-      console.log("Loading from localStorage:", JSON.parse(savedTasks));
-      setTaskList(JSON.parse(savedTasks));
-    }
-  }, []);
+  
 
   const handleAddTask = () => {
-    if (newTask.trim() === '') return;
-    setTaskList((prevTasks) => [...prevTasks, { id: uuidv4(), task: newTask, completed: false }]);
-    setNewTask('');
+    if (newTask.trim() === ''){
+      setValidate(true);
+    
+    }else{
+      setTaskList((prevTasks) => [...prevTasks, { id: uuidv4(), task: newTask, completed: false }]);
+      setNewTask('');
+      setValidate(false)
+    }
+    
   };
 
   const handleDeleteTask = (id: string) => {
@@ -74,16 +76,22 @@ export const TodoApp = () => {
       <div className="counter">
         <span className="text-count"> TAREAS
           <img className="text-count-icon" src={editIcon} alt="icon" draggable="false"/>
-          REALIDAS
+          REALIZADAS
         </span>
         <span className="task-count">{completedTasks} / {taskList.length}</span>
       </div>
+      <div className="cont-text-invalid">
+        <div className={`cont-background ${validate ? 'active-background' : ''}`}>
+          <p className="text-invalid">La tarea no puede estar vacia</p> 
+          <img className="triangle-icon" src={triangleIcon} alt="icon" />
+        </div>
+      </div>
       <div className="flex">
-            <input 
-                type="text" 
-                value={newTask}  
-                onChange={(e)=> setNewTask(e.target.value)} 
-                placeholder="nueva tarea"
+        <input 
+              type="text" 
+              value={newTask}  
+              onChange={(e)=> setNewTask(e.target.value)} 
+              placeholder="nueva tarea"
             />
             <button onClick={handleAddTask} className="button-add"><img className="add-icon" src={addIcon} alt="icon" draggable="false"/></button>
         </div>
