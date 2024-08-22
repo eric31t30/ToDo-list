@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react'
-import '../styles/Task.css'
-import deleteIcon from '/icons/delete-icon.svg'
-import editIcon from '/icons/edit-icon.svg'
-import checkIcon from '/icons/check-icon.svg'
-import cancelIcon from '/icons/cancel-icon.svg'
-import editButton from '/icons/edit-button.svg'
+import { useEffect, useState } from 'react';
+import '../styles/Task.css';
+import deleteIcon from '/icons/delete-icon.svg';
+import editIcon from '/icons/edit-icon.svg';
+import checkIcon from '/icons/check-icon.svg';
+import cancelIcon from '/icons/cancel-icon.svg';
+import editButton from '/icons/edit-button.svg';
 
 type TaskProps = {
   task: string;
@@ -13,35 +13,13 @@ type TaskProps = {
   id: string;
   toggleTaskCompletion: (id: string, validate: boolean) => void;
   completed: boolean;
-}
+  creationDate: string;
+};
 
-interface Dates {
-  hour: string;
-  minute: string;
-  day: number;
-  month: number;
-  year: number;
-}
-
-export const Task = ({ task, deleteTask, editTask, id, toggleTaskCompletion, completed }: TaskProps) => {
+export const Task = ({ task, deleteTask, editTask, id, toggleTaskCompletion, completed, creationDate }: TaskProps) => {
   const [confirmCheck, setConfirmCheck] = useState<boolean>(completed);
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [newTask, setNewTask] = useState<string>(task);
-  const [creationDate, setCreationDate] = useState<string>('');
-
-  const date: Dates = {
-    hour: String(new Date().getHours()).padStart(2, '0'),
-    minute: String(new Date().getMinutes()).padStart(2, '0'),
-    day: new Date().getDate(),
-    month: new Date().getMonth() + 1,
-    year: new Date().getFullYear()
-  };
-
-  useEffect(() => {
-    const hourNumber = parseInt(date.hour, 10);
-    const amOrPm = hourNumber >= 12 ? 'PM' : 'AM';
-    setCreationDate(`${date.hour}:${date.minute} ${amOrPm},  ${date.day} / ${date.month} / ${date.year}`);
-  }, [creationDate]);
 
   const checkActive = () => {
     setConfirmCheck(prev => !prev);
@@ -53,7 +31,6 @@ export const Task = ({ task, deleteTask, editTask, id, toggleTaskCompletion, com
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewTask(event.target.value);
-    
   }
 
   const handleSaveTask = (event: React.FormEvent) => {
@@ -112,8 +89,8 @@ export const Task = ({ task, deleteTask, editTask, id, toggleTaskCompletion, com
       <div className='cont-date' draggable='false'>
         <span className='border-space'></span>
         <div className='text-space'>este texto es para brindar espacio</div>
-        <div className='date'>{creationDate}</div>
+        <div className='date'>{new Date(creationDate).toLocaleString()}</div>
       </div>
     </div>
   );
-}
+};
