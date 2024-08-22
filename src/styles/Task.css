@@ -164,3 +164,43 @@ input.edit-input[type="text"]:focus{
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+
+@media (max-width: 719px){
+  .container-task{
+    width: 300px;
+  }
+
+  .task{
+    font-size: 1em;
+    padding: 10px 5px;
+  }
+
+  .check-button{
+    margin: 0px 3px;
+  }
+
+  .option-button{
+    padding: .2em;
+  }
+
+  .option-icon{
+    width: 22px;
+    height: 22px;
+  }
+
+  input.edit-input[type="text"]{
+    font-size: 16px;
+    padding: 2px 12px;
+    top: 0px;
+  }
+
+  .date{
+    font-size: 12px;
+  }
+
+  .text-space{
+    font-size: 10px;
+  }
+}
+
