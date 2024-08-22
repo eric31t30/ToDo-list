@@ -1,41 +1,43 @@
-import { useEffect, useState } from "react"
-import { TaskList } from "./TaskList"
-import '../styles/TodoApp.css'
+import { useEffect, useState } from "react";
+import { TaskList } from "./TaskList";
+import '../styles/TodoApp.css';
 import { v4 as uuidv4 } from 'uuid';
 
-import addIcon from '/icons/add-icon.svg'
-import titleIcon from '/icons/task-icon.svg'
-import editIcon from '/icons/edit-icon.svg'
-import triangleIcon from '/icons/triangle-icon.svg'
+import addIcon from '/icons/add-icon.svg';
+import titleIcon from '/icons/task-icon.svg';
+import editIcon from '/icons/edit-icon.svg';
+import triangleIcon from '/icons/triangle-icon.svg';
 
 interface Task {
   id: string;
   task: string;
   completed: boolean;
+  creationDate: string; 
 }
 
 export const TodoApp = () => {
 
-  const [newTask, setNewTask] = useState<string> ('')
-  const [validate, setValidate] = useState<boolean>()
+  const [newTask, setNewTask] = useState<string>('');
+  const [validate, setValidate] = useState<boolean>();
   const [completedTasks, setCompletedTasks] = useState<number>(0);
   const [taskList, setTaskList] = useState<Task[]>(() => {
     const savedTasks = localStorage.getItem("taskList");
-    return savedTasks ? JSON.parse(savedTasks) : [{ id: uuidv4(), task: '- Agrega más tareas', completed: false }];
+    return savedTasks ? JSON.parse(savedTasks) : [{ id: uuidv4(), task: '- Agrega más tareas', completed: false, creationDate: new Date().toISOString() }];
   });
 
-  
-
   const handleAddTask = () => {
-    if (newTask.trim() === ''){
+    if (newTask.trim() === '') {
       setValidate(true);
-    
-    }else{
-      setTaskList((prevTasks) => [...prevTasks, { id: uuidv4(), task: newTask, completed: false }]);
+    } else {
+      const creationDate = new Date().toISOString();
+      
+      setTaskList((prevTasks) => [
+        ...prevTasks,
+        { id: uuidv4(), task: newTask, completed: false, creationDate }
+      ]);
       setNewTask('');
-      setValidate(false)
+      setValidate(false);
     }
-    
   };
 
   const handleDeleteTask = (id: string) => {
@@ -49,9 +51,7 @@ export const TodoApp = () => {
     );
   };
 
-  
-  const toggleTaskCompletion = (id:string, validate: boolean) => {
-
+  const toggleTaskCompletion = (id: string, validate: boolean) => {
     setTaskList((prevTasks) =>
       prevTasks.map((task) =>
         task.id === id ? { ...task, completed: validate } : task
@@ -61,14 +61,12 @@ export const TodoApp = () => {
   
   useEffect(() => {
     const completedCount: number = taskList.filter(task => task.completed).length;
-   
     setCompletedTasks(completedCount);
-  }, [taskList])
+  }, [taskList]);
 
   useEffect(() => {
     localStorage.setItem("taskList", JSON.stringify(taskList));
   }, [taskList]);
-  
 
   return (
     <div className="container-app">
@@ -94,14 +92,14 @@ export const TodoApp = () => {
           onChange={(e)=> setNewTask(e.target.value)} 
           placeholder="nueva tarea"
         />
-          <button onClick={handleAddTask} className="button-add"><img className="add-icon" src={addIcon} alt="icon" draggable="false"/></button>
-        </div>
-        <TaskList 
-          taskList={taskList} 
-          deleteTask={handleDeleteTask} 
-          sendTask={editTask} 
-          toggleTaskCompletion={toggleTaskCompletion}>
-        </TaskList>
+        <button onClick={handleAddTask} className="button-add"><img className="add-icon" src={addIcon} alt="icon" draggable="false"/></button>
+      </div>
+      <TaskList 
+        taskList={taskList} 
+        deleteTask={handleDeleteTask} 
+        sendTask={editTask} 
+        toggleTaskCompletion={toggleTaskCompletion}
+      />
     </div>
-  )
+  );
 }
