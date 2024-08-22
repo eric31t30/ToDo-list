@@ -88,12 +88,13 @@ export const TodoApp = () => {
       </div>
       <div className="flex">
         <input 
-              type="text" 
-              value={newTask}  
-              onChange={(e)=> setNewTask(e.target.value)} 
-              placeholder="nueva tarea"
-            />
-            <button onClick={handleAddTask} className="button-add"><img className="add-icon" src={addIcon} alt="icon" draggable="false"/></button>
+          className="principal-input"
+          type="text" 
+          value={newTask}  
+          onChange={(e)=> setNewTask(e.target.value)} 
+          placeholder="nueva tarea"
+        />
+          <button onClick={handleAddTask} className="button-add"><img className="add-icon" src={addIcon} alt="icon" draggable="false"/></button>
         </div>
         <TaskList 
           taskList={taskList} 

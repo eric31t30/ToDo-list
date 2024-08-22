@@ -30,7 +30,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 70px;
 }
 
 .title span{
@@ -139,7 +138,7 @@ input[type="text"]:focus{
     transition: all .3s ease-in-out;
 }
 
-.cont-background:hover .triangle-icon{
+.cont-text-invalid:hover .triangle-icon{
     bottom: -20px;
 }
 
@@ -189,3 +188,135 @@ input[type="text"]:focus{
 }
 
 
+@media (max-width: 719px){
+
+    .container-app{
+       margin-top: 100px;
+    }
+
+    .title{
+        font-size: 1.7em;
+        left: 5%;
+        top: 30px;
+    }
+
+    .title-icon{
+        width: 24px;
+        height: 24px;
+        margin: 10px;
+    }
+
+    .flex{
+        min-width: 300px;
+    }
+
+    input[type="text"]{
+        font-size: 12px;
+        padding: 8px 12px;
+        border-radius: 5px;
+    }
+
+    .button-add{
+        width: 30px;
+        height: 30px;
+        padding: 0px;
+        margin: 0px 15px;
+        margin-right: 0px;
+    }
+
+    .add-icon{
+        width: 30px;
+        height: 30px;
+    }
+
+    .counter{
+        top: 30px;
+        right: 20px;
+        width: 150px;
+        height: 50px;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .text-count{
+        font-size: 10px;
+    }
+
+    .text-count-icon{
+        width: 13px;
+        height: 13px;
+    }
+
+    .task-count{
+        font-size: 15px;
+        border-radius: 5px;
+        padding: 2px 0px;
+    }
+
+    .cont-text-invalid{
+        margin-bottom: 20px;
+    }
+
+    .text-invalid{
+        font-size: 10px;
+    }
+
+    .triangle-icon{
+        width: 15px;
+        height: 15px;
+    }
+
+    .cont-text-invalid:hover .active-background{
+        top: -10px;
+    }
+    
+    .cont-text-invalid:hover .triangle-icon{
+        bottom: -10px;
+    }
+}
+
+@media (min-width: 720px) and (max-width:1299px){
+
+    .title{
+        font-size: 3.4em;
+    }
+
+    .title-icon{
+        width: 50px;
+        height: 50px;
+    }
+
+    .counter{
+       width: 250px;
+       height: 80px;
+       border-radius: 10px;
+    }
+
+    .text-count{
+        font-size: 16px;
+    }
+    
+    .task-count{
+        font-size: 24px;
+        border-radius: 10px;
+    }
+}
+
+@media (min-width: 1300px) and (max-width: 1919px){
+
+    .counter{
+        width: 270px;
+        height: 80px;
+        border-radius: 10px;
+    }
+ 
+    .text-count{
+        font-size: 18px;
+    }
+     
+    .task-count{
+        font-size: 24px;
+        border-radius: 10px;
+    }
+    
+}
