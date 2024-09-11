@@ -20,7 +20,7 @@ export const TaskList = ({ taskList, deleteTask, sendTask, toggleTaskCompletion 
           editTask={(_, text) => sendTask(task.id, text)}
           toggleTaskCompletion={(_, validate) => toggleTaskCompletion(task.id, validate)}
           completed={task.completed}
-          creationDate={task.creationDate} // Pasa la fecha de creación
+          creationDate={task.creationDate}
         />
       ))}
     </div>
